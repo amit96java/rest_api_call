@@ -10,9 +10,13 @@ import java.net.URL;
 import java.util.Base64;
 
 public interface HttpHelper {
+
     String openSession = "https://10.127.5.137/api/restconf/operations/adtran-cloud-platform-netconf-client-service:open-session";
     String closeSession = "https://10.127.5.137/api/restconf/operations/adtran-cloud-platform-netconf-client-service:close-session";
 
+    default String getOpenSessionUrl(String mcpIp) {
+        return String.format("https://%s/api/restconf/operations/adtran-cloud-platform-netconf-client-service:open-session", mcpIp);
+    }
     default HttpsURLConnection getConnection(URL url) throws IOException {
         HttpsURLConnection httpURLConnection = (HttpsURLConnection) url.openConnection();
         httpURLConnection.setDoOutput(true);
@@ -25,7 +29,7 @@ public interface HttpHelper {
 
     default CreateSessionObject getSessionObject(String sessionName) {
         CreateSessionObject object = new CreateSessionObject();
-        object.oltIp = "10.11.25.9";
+        object.oltIp = "10.11.13.9";
         object.oltPort = "830";
         object.oltUserName = "hsvroot";
         object.oltPassword = "BOSCO";

@@ -30,7 +30,7 @@ public class PostApi implements Converter, HttpHelper, DisableSSL {
 
     public void createSession(String sessionName) {
         try {
-            URL url = new URL(openSession);
+            URL url = new URL(getOpenSessionUrl("10.127.5.137"));
             HttpsURLConnection httpsURLConnection = getConnection(url);
             try(OutputStream outputStream = httpsURLConnection.getOutputStream()) {
                 //below payload write
