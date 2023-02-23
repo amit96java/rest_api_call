@@ -15,4 +15,9 @@ class RestApiCallApplicationTests {
 	void testSum() {
 		Assertions.assertTrue(5==5);
 	}
+
+	@Test
+	void testEqual() {
+		Assertions.assertEquals(1, 2);
+	}
 }
