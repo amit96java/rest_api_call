@@ -9,8 +9,11 @@ public class Main {
         int threadCount = 10;
         ExecutorService service = Executors.newFixedThreadPool(threadCount);
         PostApi psmService = new PostApi();
-        IntStream.range(0,threadCount).forEach(num -> service.execute(() -> psmService.createSession(String.valueOf(num))));
+//        IntStream.range(0,threadCount).forEach(num -> service.execute(() -> psmService.createSession(String.valueOf(num))));
 //        IntStream.range(0,threadCount).forEach(num -> service.execute(() -> psmService.deleteSession(String.valueOf(num))));
+
+        IntStream.range(0,threadCount).forEach(num -> service.execute(() -> psmService.createBook(String.valueOf(num))));
+
         service.shutdown();
 
     }

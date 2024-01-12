@@ -1,5 +1,6 @@
 package com.amit.rest_api_call.http_url_connection;
 
+import com.amit.rest_api_call.dto.Book;
 import com.amit.rest_api_call.helper.Converter;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -47,6 +48,29 @@ public class PostApi implements Converter, HttpHelper, DisableSSL {
             }
         } catch (Exception exp) {
             println("error occurred: "+sessionName+" : "+exp.getMessage() );
+        }
+    }
+
+    public void createBook(String bookId) {
+        try {
+            URL url = new URL("http://localhost:7171");
+            HttpURLConnection httpsURLConnection = getHttpConnection(url);
+            try(OutputStream outputStream = httpsURLConnection.getOutputStream()) {
+                //below payload write
+                outputStream.write(convertObjectToJsonString(new Book(bookId, "bookName")).getBytes());
+                outputStream.flush();
+            }
+            println(Thread.currentThread().getName() + " "+ getCurrentTime());
+            if(httpsURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                String text = convertInputStreamToString(httpsURLConnection.getInputStream());
+                println("good response  " + text);
+            } else {
+                String text = convertInputStreamToString(httpsURLConnection.getErrorStream());
+                println("error response  " + text);
+            }
+        } catch (Exception exp) {
+            exp.printStackTrace();
+            println("error occurred: "+bookId+" : "+exp.getMessage() );
         }
     }
 

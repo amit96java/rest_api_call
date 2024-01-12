@@ -6,11 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "/")
 public class RestApiCallApplication /*implements CommandLineRunner*/ {
 
 	public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class RestApiCallApplication /*implements CommandLineRunner*/ {
 	}
 
 	@GetMapping
-	public String ping() {
-		return "Hello";
+	public String ping(@RequestParam("code") String code) {
+		return "Hello "+code;
 	}
 }
